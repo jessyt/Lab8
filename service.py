@@ -10,8 +10,7 @@ class GameApp:
         return self.game.create_game(params)
     
     def get_game_by_id(self, item_id):
-        response = self.game.get_game_by_id(item_id)
-        return response
+        return self.game.get_game_by_id(item_id)
     
     def get_games(self):
         return self.game.get_all_games()
