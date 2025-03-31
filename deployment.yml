@@ -1,0 +1,24 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lab8
+  labels:
+    app: lab8
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lab8
+  # pod spec begins here
+  template:
+    metadata:
+      labels:
+        app: lab8
+    spec:
+      containers:
+        - name: lab8
+          image: registry.digitalocean.com/cribbage-lab/lab8:0.0.1
+          imagePullPolicy: IfNotPresent
+          ports:
+          - containerPort: 5000
