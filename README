@@ -1,0 +1,10 @@
+Hello! This application is kind of a cribbage app that allows the user to create people
+which keeps track of wins and losses of all time, and also create cribbage games
+between two people. The app lets you set the scoring amount per game, and lets 
+you increment scores of each player. 
+
+Attached is a postman collection
+1. Create two players (Create a player)
+2. Create a game with the two players (use the get all players to figure out ids for players)
+3. increment players points until it returns "player <?> won!"
+4. Increment a players wins 

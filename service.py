@@ -1,22 +1,32 @@
-from models import ToDoModel
+from models import GameModel
+from models import PlayerModel
 
-class ToDoService:
+class GameApp:
     def __init__(self):
-        self.model = ToDoModel()
+        self.game = GameModel()
+        self.player = PlayerModel()
 
-    def create(self, params):
-        return self.model.create(params)
-
-    def update(self, item_id, params):
-        return self.model.update(item_id, params)
-
-    def delete(self, item_id):
-        return self.model.delete(item_id)
-
-    def list(self):
-        response = self.model.list_items()
+    def create_game(self, params):
+        return self.game.create_game(params)
+    
+    def get_game_by_id(self, item_id):
+        response = self.game.get_game_by_id(item_id)
         return response
+    
+    def get_games(self):
+        return self.game.get_all_games()
 
-    def get_by_id(self, item_id):
-        response = self.model.get_by_id(item_id)
-        return response
+    def update_Points(self, params):
+        return self.game.update_Points(params)
+
+    def increment_wins(self, params):
+        return self.player.increment_wins(params)
+    
+    def increment_losses(self, params):
+        return self.player.increment_losses(params)
+    
+    def create_player(self, playerName):
+        return self.player.create_player(playerName)
+    
+    def get_players(self):
+        return self.player.get_all_players()

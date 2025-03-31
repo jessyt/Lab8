@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from service import ToDoService
+from service import GameApp
 from models import Schema
 import json
 app = Flask(__name__)
@@ -13,32 +13,46 @@ def add_headers(response):
 
 @app.route("/")
 def hello():
-    return "Hello World!"
+    return "Cribbage Game App!"
 
-@app.route("/<name>")
-def hello_name(name):
-    return "Hello " + name
+@app.route("/getgamebyid/<game_id>", methods=["GET"])
+def get_game_by_id(game_id):
+    return jsonify(GameApp().get_game_by_id(game_id))
 
-@app.route("/todo", methods=["GET"])
-def list_todo():
-    return jsonify(ToDoService().list())
+@app.route("/createGame", methods=["POST"])
+def create_game():
+    return jsonify(GameApp().create_game(request.get_json()))
 
-@app.route("/todo", methods=["POST"])
-def create_todo():
-    return jsonify(ToDoService().create(request.get_json()))
+@app.route("/getallgames", methods=["GET"])
+def get_all_games():
+    return jsonify(GameApp().get_games())
 
-@app.route("/todo/<item_id>", methods=["PUT"])
-def update_item(item_id):
-    return jsonify(ToDoService().update(item_id, request.get_json()))
+@app.route("/incrementPlayersPoints", methods=["POST"])
+def update_players_points():
+    return jsonify(GameApp().update_Points(request.get_json()))
+    
+#########################
+## PLAYER INFORMATION
+#########################
+@app.route("/createplayer", methods=["POST"])
+def create_player():
+    jsonData = request.get_json()
+    name = jsonData.get("name")
+    return jsonify(GameApp().create_player(name))
 
-@app.route("/todo/<item_id>", methods=["GET"])
-def get_item(item_id):
-    return jsonify(ToDoService().get_by_id(item_id))
+@app.route("/getallplayers", methods=["GET"])
+def get_all_players():
+    return jsonify(GameApp().get_players())
 
-@app.route("/todo/<item_id>", methods=["DELETE"])
-def delete_item(item_id):
-    return jsonify(ToDoService().delete(item_id))
+@app.route("/incrementplayerwins", methods=["POST"])
+def increment_players_wins():
+    return jsonify(GameApp().increment_wins(request.get_json()))
+
+@app.route("/incrementplayerlosses", methods=["POST"])
+def increment_players_losses():
+    return jsonify(GameApp().increment_losses(request.get_json()))
+
 
 if __name__ == "__main__":
     Schema()
-    app.run(debug=True, host='127.0.0.1', port=5000)
+    app.run(host='0.0.0.0', port=5000)
