@@ -80,12 +80,12 @@ class GameModel:
         gameId = params.get("gameId")   
         if playerNumber == 1:
             query = f"UPDATE {self.TABLENAME} " \
-                f"SET Player1Score  = Player1Score + {params.get("scoredAmount")} " \
-                f"WHERE id = {gameId}"
+                f'SET Player1Score  = Player1Score + {params.get("scoredAmount")} ' \
+                f'WHERE id = {gameId}'
         elif playerNumber == 2:
             query = f"UPDATE {self.TABLENAME} " \
-                f"SET Player2Score  = Player2Score + {params.get("scoredAmount")} " \
-                f"WHERE id = {gameId}"
+                f'SET Player2Score  = Player2Score + {params.get("scoredAmount")} ' \
+                f'WHERE id = {gameId}' 
         else:
             return "ERROR - Please only enter 1 or 2"
         self.conn.execute(query)
